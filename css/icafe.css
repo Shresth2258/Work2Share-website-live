@@ -1,0 +1,112 @@
+/* ===== The i Cafe section ===== */
+.ic{padding:110px 0;background:linear-gradient(180deg,#f2faf0,#e1f3e4);position:relative;overflow:hidden}
+.ic-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+.ic-logo{width:120px;height:120px;border-radius:50%;margin-bottom:22px;box-shadow:0 16px 36px rgba(46,125,79,.3);position:relative;animation:icFloat 5s ease-in-out infinite}
+.ic-logo::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px dashed rgba(46,125,79,.45);animation:icSpin 28s linear infinite}
+.ic-logo img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.ic .ic-eyebrow{color:#2e7d4f;font-weight:800;letter-spacing:.2em;opacity:1}
+.ic h2{font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.1;margin-bottom:16px;color:#16402a}
+.ic h2 em{color:#2e7d4f;white-space:nowrap}
+.ic-txt p{color:#4c6a58;line-height:1.75;max-width:480px}
+.ic .ticks{margin:22px 0 28px}
+.ic .ic-btn{background:#2e7d4f}
+.ic-vis{border-radius:40px 40px 40px 10px;overflow:hidden;box-shadow:0 26px 60px rgba(46,125,79,.25);background:#d9f1e0}
+.ic-vis svg{display:block;width:100%;height:auto}
+.ic-bulbs circle{fill:#ffd35a}
+.ic-perks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.icp{background:#fff;border-radius:22px;padding:20px 18px;box-shadow:0 12px 30px rgba(46,125,79,.12);display:flex;flex-direction:column;gap:4px;transition:transform .35s,box-shadow .35s}
+.icp:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(46,125,79,.22)}
+.icp i{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;margin-bottom:8px;color:#fff;background:linear-gradient(135deg,#46b877,#2e7d4f)}
+.icp:nth-child(even) i{background:linear-gradient(135deg,#7cc96a,#2e9a5a)}
+.icp svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.icp b{font-size:.98rem;color:#16402a}
+.icp small{color:#5d7a69;font-size:.8rem;line-height:1.5}
+@keyframes icFloat{50%{transform:translateY(-6px)}}
+@keyframes icSpin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.ic{padding:70px 0}.ic-grid{grid-template-columns:1fr;gap:36px}.ic-perks{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.ic-perks{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.ic-logo,.ic-logo::after{animation:none}}
+
+/* scene animation */
+.ic-vine,.ic-hang,.ic-umb,.ic-cat,.ic-tail,.ic-wbob,.ic-bfly .wl,.ic-bfly .wr,.ic-pour,.ic-bar-b,.ic-lamp,.ic-halo,.ic-bird path,.ic-hedge,.ic-wall,.pks-guest,.pks-steam,.ic-cup,.ic-heart,.ic-cloud,.ic-roofplants{transform-box:fill-box}
+.ic-sun{transform-box:fill-box}
+.ic-halo{animation:icHalo 4s ease-in-out infinite;transform-origin:50% 50%}
+.ic-rays{animation-duration:30s}
+.ic-cloud{animation:icDrift 26s ease-in-out infinite alternate}
+.ic-cloud.c2{animation-duration:34s;animation-delay:-9s}
+.ic-cloud.c3{animation-duration:40s;animation-delay:-18s}
+.ic-bird{animation:icFly 18s linear infinite}
+.ic-bird path{animation:icFlap .5s ease-in-out infinite alternate;transform-origin:50% 100%}
+.ic-bird.b1{transform:translate(-40px,60px);--y:60px}
+.ic-bird.b2{--y:84px;animation-delay:-6s;animation-duration:22s}
+.ic-bird.b3{--y:46px;animation-delay:-12s;animation-duration:26s}
+.ic-balloon{transform:translate(300px,70px);animation:icBalloon 14s ease-in-out infinite alternate}
+.ic-win{animation:icWin 5s ease-in-out infinite;opacity:.35}
+.ic-win.w2{animation-delay:-1.7s}.ic-win.w3{animation-delay:-3.2s}
+.ic-wire{animation:icWire 4s ease-in-out infinite alternate;transform-origin:50% 0}
+.ic-bulbs circle{animation:pkTw 2.4s ease-in-out infinite,icHue 6s linear infinite}
+.ic-bulbs circle:nth-child(2n){animation-delay:-1.2s,-2s}
+.ic-bulbs circle:nth-child(3n){animation-delay:-.6s,-4s}
+.ic-sign{transform-origin:270px 106px;transform-box:view-box;animation:icSwing 4.5s ease-in-out infinite alternate}
+.ic-umb{transform-origin:50% 100%;animation:icUmb 5s ease-in-out infinite alternate}
+.ic-cup{animation:icSip 4.6s ease-in-out infinite}
+.ic-cup.c2{animation-delay:-2.3s}
+.ic-vis .pks-steam{stroke-width:2.2}
+.ic-heart{opacity:0;animation:icHeart 5.2s ease-out infinite}
+.ic-heart.h2{animation-delay:-2.6s}
+.ic-cat{animation:icCat 6s ease-in-out infinite;transform-origin:50% 100%}
+.ic-tail{transform-origin:0% 100%;animation:icTail 1.4s ease-in-out infinite alternate}
+.ic-waiter{transform:translate(-40px,0);animation:icWalk 20s linear infinite}
+.ic-wbob{animation:icBob .55s ease-in-out infinite alternate}
+.icp i{animation:icpIc 4s ease-in-out infinite}
+.icp:nth-child(2) i{animation-delay:-1s}.icp:nth-child(3) i{animation-delay:-2s}.icp:nth-child(4) i{animation-delay:-3s}
+@keyframes icHalo{50%{transform:scale(1.18);opacity:.18}}
+@keyframes icDrift{to{transform:translateX(60px)}}
+@keyframes icFly{0%{transform:translate(-40px,var(--y,60px))}50%{transform:translate(300px,calc(var(--y,60px) - 18px))}100%{transform:translate(620px,var(--y,60px))}}
+@keyframes icFlap{to{transform:scaleY(.35)}}
+@keyframes icBalloon{from{transform:translate(290px,62px) rotate(-3deg)}to{transform:translate(330px,50px) rotate(3deg)}}
+@keyframes icWin{0%,100%{opacity:.2}50%{opacity:.85}}
+@keyframes icWire{to{transform:translateY(3px)}}
+@keyframes icHue{0%,100%{fill:#ffd35a}33%{fill:#ff9f5a}66%{fill:#ff7aa8}}
+@keyframes icSwing{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+@keyframes icUmb{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+@keyframes icSip{0%,55%,100%{transform:translateY(0)}65%,80%{transform:translateY(-9px)}90%{transform:translateY(0)}}
+@keyframes icHeart{0%{opacity:0;transform:translateY(8px) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-34px) scale(1.1)}}
+@keyframes icCat{0%,60%,100%{transform:scaleY(1)}70%{transform:scaleY(1.06)}}
+@keyframes icTail{to{transform:rotate(28deg)}}
+@keyframes icWalk{0%{transform:translate(-50px,0)}100%{transform:translate(620px,0)}}
+@keyframes icBob{to{transform:translateY(-3px)}}
+@keyframes icpIc{50%{transform:translateY(-4px) rotate(-5deg)}}
+@media(prefers-reduced-motion:reduce){.ic-vis svg *,.icp i{animation:none!important}.ic-heart{opacity:0}}
+
+/* greenery */
+.ic::before,.ic::after{content:"";position:absolute;width:260px;height:260px;background:radial-gradient(circle at 30% 30%,rgba(70,184,119,.28),transparent 65%);border-radius:50%;pointer-events:none}
+.ic::before{left:-90px;top:-90px}.ic::after{right:-90px;bottom:-90px}
+.ic .wrap{position:relative;z-index:1}
+.ic-vis svg .ic-vine,.ic-vis svg .ic-hang{transform-origin:50% 0;animation:icVine 4.2s ease-in-out infinite alternate}
+.ic-hang{animation-duration:5s!important}
+.ic-hedge{animation:icHedge 4.5s ease-in-out infinite alternate;transform-origin:50% 100%}
+.ic-wall{animation:icWall 6s ease-in-out infinite alternate}
+.ic-fall{transform:translate(var(--x,100px),-20px);animation:icFall 14s linear infinite}
+.ic-bfly{animation:icBf1 16s ease-in-out infinite}
+.ic-bfly.f2{animation-name:icBf2;animation-duration:20s;animation-delay:-7s}
+.ic-bfly .wl{transform-origin:100% 50%;animation:icWing .25s ease-in-out infinite alternate}
+.ic-bfly .wr{transform-origin:0% 50%;animation:icWing .25s ease-in-out infinite alternate}
+@keyframes icVine{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+@keyframes icHedge{from{transform:scale(1,1)}to{transform:scale(1.012,1.04)}}
+@keyframes icWall{from{filter:brightness(1)}to{filter:brightness(1.18)}}
+@keyframes icFall{0%{transform:translate(var(--x),-20px) rotate(0)}25%{transform:translate(calc(var(--x) + 30px),80px) rotate(90deg)}50%{transform:translate(calc(var(--x) - 20px),170px) rotate(200deg)}75%{transform:translate(calc(var(--x) + 25px),250px) rotate(300deg)}100%{transform:translate(var(--x),320px) rotate(400deg);opacity:0}}
+@keyframes icBf1{0%{transform:translate(40px,250px)}25%{transform:translate(160px,190px)}50%{transform:translate(300px,230px)}75%{transform:translate(420px,180px)}100%{transform:translate(40px,250px)}}
+@keyframes icBf2{0%{transform:translate(520px,200px)}30%{transform:translate(380px,150px)}60%{transform:translate(220px,210px)}100%{transform:translate(520px,200px)}}
+@keyframes icWing{to{transform:scaleX(.25)}}
+
+/* rooftop view */
+.ic-vis svg .ic-sign{transform-box:view-box;transform-origin:280px 98px}
+.ic-blink{animation:icBlink 1.6s steps(1) infinite}
+.ic-lamp{opacity:.35;animation:icLamp 3s ease-in-out infinite alternate}
+.ic-lampg:nth-child(2) .ic-lamp{animation-delay:-1s}.ic-lampg:nth-child(3) .ic-lamp{animation-delay:-2s}
+.ic-pour{transform-origin:50% 0;animation:icPour 3.4s ease-in-out infinite}
+.ic-bar-b{animation:icBob 1.1s ease-in-out infinite alternate}
+@keyframes icBlink{0%,60%{opacity:1}61%,100%{opacity:.15}}
+@keyframes icLamp{to{opacity:.7;transform:scale(1.15)}}
+@keyframes icPour{0%,100%{transform:rotate(0)}45%{transform:rotate(-24deg)}70%{transform:rotate(14deg)}}

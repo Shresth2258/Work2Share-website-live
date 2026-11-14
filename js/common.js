@@ -25,16 +25,19 @@ if(!window.__rvDone){const io2=new IntersectionObserver(e=>e.forEach(x=>{if(x.is
 
 // 4. Lightbox
 const lb=document.createElement('div');lb.className='lb';lb.hidden=true;lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','Photo viewer');
-lb.innerHTML='<button class="lb-x" aria-label="Close">✕</button><button class="lb-p" aria-label="Previous photo">←</button><div class="lb-st"><img alt=""><div class="lb-ph">Add your photo in<br><small></small></div></div><button class="lb-n" aria-label="Next photo">→</button><p class="lb-c"></p>';
+lb.innerHTML='<button class="lb-x" aria-label="Close">✕</button><button class="lb-p" aria-label="Previous photo">←</button><div class="lb-st"><img alt=""><video controls playsinline hidden></video><div class="lb-ph">Add your photo in<br><small></small></div></div><button class="lb-n" aria-label="Next photo">→</button><p class="lb-c"></p>';
 document.body.append(lb);
 let list=[],cur=0,opener=null;
-const im=q('.lb-st img',lb),ph=q('.lb-ph',lb);
+const im=q('.lb-st img',lb),vd=q('.lb-st video',lb),ph=q('.lb-ph',lb);
 function show(i){list=qa('.gt[data-lb]').filter(t=>t.offsetParent!==null);cur=(i+list.length)%list.length;const t=list[cur],img=q('img',t);
+ vd.pause();
+ if(t.dataset.video){im.hidden=true;ph.hidden=true;vd.hidden=false;vd.src=t.dataset.video;vd.poster=img?img.src:'';vd.play().catch(()=>{});q('.lb-c',lb).textContent=q('figcaption',t).textContent+'  ('+(cur+1)+'/'+list.length+')';return}
+ vd.hidden=true;
  const ok=img&&!img.classList.contains('miss')&&img.naturalWidth>0;
  im.hidden=!ok;ph.hidden=ok;if(ok){im.src=img.currentSrc||img.src;im.alt=img.alt}else q('small',ph).textContent=img?img.dataset.g+'.jpg':'';
  q('.lb-c',lb).textContent=q('figcaption',t).textContent+'  ('+(cur+1)+'/'+list.length+')'}
 function open(t){opener=t;list=qa('.gt[data-lb]').filter(x=>x.offsetParent!==null);lb.hidden=false;document.body.style.overflow='hidden';show(list.indexOf(t));q('.lb-x',lb).focus()}
-function close(){lb.hidden=true;document.body.style.overflow='';opener&&opener.focus()}
+function close(){vd.pause();lb.hidden=true;document.body.style.overflow='';opener&&opener.focus()}
 document.addEventListener('click',e=>{const t=e.target.closest('.gt[data-lb]');if(t)open(t)});
 qa('.gt[data-lb]').forEach(t=>{t.tabIndex=0;t.setAttribute('role','button');t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(t)}})});
 q('.lb-x',lb).onclick=close;q('.lb-p',lb).onclick=()=>show(cur-1);q('.lb-n',lb).onclick=()=>show(cur+1);
