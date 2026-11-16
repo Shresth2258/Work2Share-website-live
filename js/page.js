@@ -3,9 +3,6 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 window.__rvDone=false;
 addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=scrollY/(h.scrollHeight-innerHeight)*100+'%';$('#hd').classList.toggle('s',scrollY>40)},{passive:true});
-$('#bg').onclick=()=>$('#pl').classList.toggle('o');
-$$('#pl a').forEach(a=>a.addEventListener('click',()=>$('#pl').classList.remove('o')));
-
 // gallery filters
 $$('#fl button').forEach(b=>b.onclick=()=>{
  $$('#fl button').forEach(x=>x.classList.toggle('on',x===b));

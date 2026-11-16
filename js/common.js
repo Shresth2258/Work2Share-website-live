@@ -11,6 +11,27 @@ wa.innerHTML='<span class="wa-tip">Chat with us on WhatsApp</span><span class="w
 document.body.append(wa);
 setTimeout(()=>wa.classList.add('tip'),2500);setTimeout(()=>wa.classList.remove('tip'),9000);
 
+// Mobile navigation
+const menuButton=q('#bg'),menu=q('#pl');
+if(menuButton&&menu){
+ menuButton.setAttribute('aria-controls','pl');
+ menuButton.setAttribute('aria-expanded','false');
+ menuButton.setAttribute('aria-label','Open menu');
+ const setMenuOpen=open=>{
+  menu.classList.toggle('o',open);
+  menuButton.setAttribute('aria-expanded',String(open));
+  menuButton.setAttribute('aria-label',open?'Close menu':'Open menu');
+ };
+ menuButton.addEventListener('click',()=>setMenuOpen(!menu.classList.contains('o')));
+ menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false)});
+ document.addEventListener('click',e=>{
+  if(menu.classList.contains('o')&&!menu.contains(e.target)&&!menuButton.contains(e.target))setMenuOpen(false);
+ });
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&menu.classList.contains('o')){setMenuOpen(false);menuButton.focus()}
+ });
+}
+
 // 2. Gallery photos: tries jpg, jpeg, png, webp, avif; shows a placeholder if none exist
 const EX=['jpg','jpeg','png','webp','avif'];
 qa('img[data-g]').forEach(img=>{let i=0;img.addEventListener('error',()=>{i++;if(i<EX.length)img.src=img.dataset.g+'.'+EX[i];else img.classList.add('miss')});img.src=img.dataset.g+'.'+EX[0]});

@@ -3,7 +3,6 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=scrollY/(h.scrollHeight-innerHeight)*100+'%';$('#hd').classList.toggle('s',scrollY>40);
  const wd=$$('.w'),r=$('#words').getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.85-r.top)/(innerHeight*.6)));wd.forEach((w,i)=>w.classList.toggle('on',i/wd.length<p));
  const g=$('#gs');if(g)g.style.translate='0 '+Math.min(scrollY*.08,60)+'px';},{passive:true});
-$('#bg').onclick=()=>$('#pl').classList.toggle('o');$$('#pl a').forEach(a=>a.onclick=()=>$('#pl').classList.remove('o'));
 // word reveal
 (function(){const h=$('#words');const o=[];h.childNodes.forEach(n=>{if(n.nodeType===3)n.textContent.split(/\s+/).filter(Boolean).forEach(t=>{const s=document.createElement('span');s.className='w';s.textContent=t;o.push(s)});else{const s=document.createElement('span');s.className='w';s.append(n.cloneNode(true));o.push(s)}});h.textContent='';o.forEach(s=>h.append(s,' '))})();
 // reveals
