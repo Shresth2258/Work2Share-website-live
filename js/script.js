@@ -1,4 +1,5 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const autoMotion=matchMedia('(min-width:861px) and (hover:hover) and (pointer:fine)').matches;
 // progress + header
 addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=scrollY/(h.scrollHeight-innerHeight)*100+'%';$('#hd').classList.toggle('s',scrollY>40);
  const wd=$$('.w'),r=$('#words').getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.85-r.top)/(innerHeight*.6)));wd.forEach((w,i)=>w.classList.toggle('on',i/wd.length<p));
@@ -15,7 +16,7 @@ for(let i=0;i<7;i++){const s=document.createElementNS('http://www.w3.org/2000/sv
 // hero rotating headline
 let hi=0;
 const dts=$$('#hd2 b');function setH(i){hi=i;dts.forEach((d,k)=>d.classList.toggle('a',k===i));$$('.sl,.art').forEach(e=>{const k=+e.dataset.i;e.classList.toggle('on',k===i);e.classList.toggle('out',k===(i+2)%3)});initBirds(i)}setTimeout(()=>setH(0),100);
-dts.forEach((d,i)=>d.onclick=()=>setH(i));setInterval(()=>setH((hi+1)%3),5500);
+dts.forEach((d,i)=>d.onclick=()=>setH(i));if(autoMotion)setInterval(()=>setH((hi+1)%3),5500);
 // mouse parallax on hero
 $('#stage').addEventListener('pointermove',e=>{const r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;$('#win').style.transform=`translate(${500+x*30}px,${40+y*30}px)`;e.currentTarget.querySelector('.disc').style.translate=`${x*-20}px ${y*-20}px`});
 // office tour
@@ -34,8 +35,8 @@ $('#stage').addEventListener('pointermove',e=>{const r=e.currentTarget.getBoundi
 const T=[['Northwind Media','We started with a single hot desk and moved to a private cabin within months. The community made growing feel easy.','Asha Verma','Founder'],['Helio Energy','The virtual office gave us a professional address from day one, and mail handling just works. No rent, no fuss.','Nikhil Rao','Director'],['Futura Capital','We use the meeting rooms for every client pitch. They are well equipped and always ready when we walk in.','Rohan Mehta','Partner'],['Aqualume','Fast Wi-Fi, power backup and a calm space. My remote team finally has a place it enjoys coming to.','Elena Costa','Team Lead'],['Brightpath Labs','Flexible plans meant we paid only for what we needed while small, and scaled up when we were ready.','Dev Malhotra','Co-Founder'],['Orbit Legal','Our clients see a proper business address and a smooth reception. It lifted how we look to them.','Priya Nair','Managing Partner'],['Kinfolk Studio','I met my best collaborators over coffee in the pantry. The community is the real perk.','Sam Dsouza','Designer'],['Tessera Health','Housekeeping, security and a helpful front desk are all handled, so we just walk in and work.','Dr. Kavya Iyer','Consultant']];
 const bw=$('#bars');for(let k=0;k<14;k++)bw.insertAdjacentHTML('beforeend','<i style="--k:'+k+'"></i>');const dk=$('#deck'),dd=$('#dd'),br=$$('.bars i');let ti=0;const LC=['#c8102e','#0a3d62','#e3262e','#2a7de1','#6b3fa0','#222','#d98a00','#0a8e80'],HB=[96,94,90,88,92,96,99];T.forEach((t,i)=>{dk.insertAdjacentHTML('beforeend',`<div class="tc"><div><div class="lg" style="background:${LC[i]}">${t[0]}</div><q>${t[1]}</q></div><div><strong>${t[2]}</strong><small>${t[3]}</small></div></div>`);dd.insertAdjacentHTML('beforeend','<b></b>')});
 const cs=$$('.tc'),ds=$$('#dd b');
-function show(i){ti=(i+T.length)%T.length;cs.forEach((c,k)=>{c.style.transform=`translateX(${(ti-k)*106}%)`;c.style.opacity=(k===ti||k===ti-1)?1:0});ds.forEach((x,k)=>x.classList.toggle('a',k===ti));br.forEach((b,k)=>b.style.height=(86+k*.9-((ti+k)%3))+'%');bw.classList.remove('fl');void bw.offsetWidth;bw.classList.add('fl')}
-$('#pv').onclick=()=>show(ti-1);$('#nx').onclick=()=>show(ti+1);ds.forEach((d,i)=>d.onclick=()=>show(i));show(0);setInterval(()=>show(ti+1),6000);
+function show(i){ti=(i+T.length)%T.length;cs.forEach((c,k)=>{c.style.transform=`translateX(${(ti-k)*106}%)`;c.style.opacity=(k===ti||k===ti-1)?1:0});ds.forEach((x,k)=>x.classList.toggle('a',k===ti));br.forEach((b,k)=>b.style.height=(86+k*.9-((ti+k)%3))+'%');if(autoMotion){bw.classList.remove('fl');void bw.offsetWidth;bw.classList.add('fl')}}
+$('#pv').onclick=()=>show(ti-1);$('#nx').onclick=()=>show(ti+1);ds.forEach((d,i)=>d.onclick=()=>show(i));show(0);if(autoMotion)setInterval(()=>show(ti+1),6000);
 
 // meeting rooms arch
 (function(){
@@ -147,4 +148,4 @@ function bticker(){setTimeout(bticker,BR(500,1700));const i=hi;const g=bgroup(i)
  const r=Math.random(),k=Math.floor(Math.random()*g.length);
  if(n<=1||(n<g.length&&r<.5)) bland(g,k); else if(g[k]&&g[k].on&&now-g[k].since>2200) bleave(g,k);
  }
-setTimeout(()=>{initBirds(hi);bticker()},200);
+setTimeout(()=>{initBirds(hi);if(autoMotion)bticker()},200);

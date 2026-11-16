@@ -3,6 +3,7 @@
 const R=document.documentElement;
 const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const fine=matchMedia('(pointer:fine)').matches;
+const fullMotion=fine&&matchMedia('(min-width:861px)').matches&&!rm;
 
 /* ---- card spotlight ---- */
 document.addEventListener('pointermove',e=>{
@@ -25,7 +26,7 @@ function par(){
     im.style.translate='0 '+(-k*34).toFixed(1)+'px';
   }
 }
-if(!rm){addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(par)}},{passive:true});par()}
+if(fullMotion){addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(par)}},{passive:true});par()}
 
 /* ---- tilt hero photo + float the green-section photos with the mouse ---- */
 if(fine&&!rm){
@@ -153,6 +154,7 @@ if(fine&&!rm){
   const root=document.querySelector('.px');if(!root)return;
   const its=[...root.querySelectorAll('.px-it')],sl=[...root.querySelectorAll('.px-s')],frame=root.querySelector('.px-frame');
   const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const autoPlay=matchMedia('(pointer:fine)').matches&&matchMedia('(min-width:861px)').matches&&!reduce;
   let cur=0;
   const go=i=>{
     cur=(i+its.length)%its.length;
@@ -161,7 +163,8 @@ if(fine&&!rm){
     const nn=root.querySelector('#pxN');if(nn)nn.textContent=String(cur+1).padStart(2,'0');
     root.querySelectorAll('.px-dots i').forEach((x,n)=>x.classList.toggle('on',n===cur));
     /* restart the progress bar */
-    root.classList.remove('run');void root.offsetWidth;if(!reduce)root.classList.add('run');
+    root.classList.remove('run');
+    if(autoPlay){void root.offsetWidth;root.classList.add('run')}
   };
   its.forEach((x,n)=>{
     x.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches&&n!==cur)go(n)});
@@ -174,7 +177,7 @@ if(fine&&!rm){
   stage.addEventListener('mouseenter',()=>root.classList.add('hold'));
   stage.addEventListener('mouseleave',()=>root.classList.remove('hold'));
   new IntersectionObserver(en=>{
-    if(en[0].isIntersecting){root.classList.remove('hold');if(!reduce)root.classList.add('run')}
+    if(en[0].isIntersecting){root.classList.remove('hold');if(autoPlay)root.classList.add('run')}
     else{root.classList.add('hold')}
   },{threshold:.3}).observe(root);
   /* soft 3D tilt */

@@ -75,5 +75,23 @@ img,svg,video,canvas,iframe{max-width:100%}
   .vf,.tour-ring,.vt-ring,.mr-ring{animation:none!important}
   .rv{transition-duration:.5s}
   [class*="shadow"],.ic-vis,.sk-scene{box-shadow:0 10px 24px rgba(0,0,0,.12)}
+
+  /* Keep the illustration, showcase and stat tiles static on touch devices. */
+  .hero>.bird{display:none!important}
+  .hero .art *,.hero .goose{animation:none!important}
+  .hero .chip-f,.hero .chip-f i,.hero .hbtns .btn:first-child{animation:none!important}
+  .px-stage::before,.px-stage::after,.px-frame::after,.px-gold,.px-ring svg,
+  .px-card,.px-sp,.px-chip i,.px-bar u{animation:none!important}
+  .px-s{clip-path:none!important;opacity:0;transition:opacity .3s ease!important}
+  .px-s.on{opacity:1}
+  .px-s>img{transform:none!important;transition:none!important}
+  .px-frame{box-shadow:0 12px 30px rgba(0,0,0,.24),0 0 0 6px #e3b93f!important}
+  .px-gold{box-shadow:none!important}
+  .stats .st::before,.stats .st-ic,.stats .st-ic::before{animation:none!important}
+  .stats .st{box-shadow:0 10px 24px rgba(10,60,60,.08)}
+  .stats .st-ic{box-shadow:0 8px 18px rgba(10,142,128,.25)}
+  .garden .gd-p .pimg,.garden .gd-orb,.garden .gd-badge>svg,
+  .garden .gd-chip,.garden .gd-chip i{animation:none!important}
+  .pimg img{will-change:auto}
 }
 @media(prefers-reduced-motion:reduce){.off *{animation:none!important}}
